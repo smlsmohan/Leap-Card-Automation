@@ -1,0 +1,61 @@
+{
+  "name": "LeapCard_Automation",
+  "projectId": "e2b64604-adee-47a9-98d9-0945b49ab00a",
+  "description": "Create an RPA process called \"LeapCard_PoC\" that validates Leap Card applications using data embedded in the project.\n1. Data location:\n   - A folder named \"SampleApplicants\" exists inside the project root.\n   - Each subfolder is named person_XXX and contains:\n     - applicant_data.csv (with columns: application_id, full_name, dob, academic_year, live_selfie_match_score, payment_authorised)\n     - sample_student_id.jpg\n     - selfie.jpg\n     - sample_passport.pdf\n   - The workflow must locate this folder using:\n       SampleRootPath = Path.Combine(Environment.CurrentDirectory, \"SampleApplicants\")\n   - Outputs must be stored in:\n       OutputRootPath = Path.Combine(Environment.CurrentDirectory, \"Output\")\n2. Business rules:\n   - Calculate applicant age from dob.\n   - Age must be greater than 16 and less than or equal to 25; otherwise reject.\n   - academic_year must equal \"2025/26\".\n   - payment_authorised must be True.\n   - live_selfie_match_score < 0.70 → Reject with reason \"Low selfie match score (<0.70)\".\n   - live_selfie_match_score >= 0.70 and < 0.85 → Manual Review with reason \"Selfie match score in manual review band (0.70–0.85)\".\n   - live_selfie_match_score >= 0.85 → Approved.\n3. Output:\n   - Append each result to one of three CSVs inside OutputRootPath:\n       approved.csv\n       manual_review.csv\n       rejected.csv\n   - CSV columns: application_id, full_name, status, reasons.\n4. Email notifications:\n   - Use SMTP to send an email for each processed application.\n   - SMTP server: smtp.gmail.com, port 587, StartTLS = True.\n   - From and To email addresses, SMTP username, and SMTP password are configurable arguments.\n   - Subject: \"Leap Card Application Status – {application_id}\".\n   - Body: Include status, applicant name, and rejection/manual review reason.\n5. Additional requirements:\n   - Ensure Output folder and CSV files are created with headers if not existing.\n   - Fully comment the workflow for academic submission.\n   - Use relative paths so that the automation works without internet or external storage.\ncreate without data type issues and use gmail and sent email with respective information in the ody as per the processed information for all applicants",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.GSuite.Activities": "3.2.10",
+    "UiPath.IntegrationService.Activities": "1.15.0",
+    "UiPath.System.Activities": "25.6.1",
+    "UiPath.WebAPI.Activities": "1.21.1"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.0",
+  "studioVersion": "24.11.0.0",
+  "projectVersion": "1.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "netFrameworkLazyLoading": false,
+    "isPausable": true,
+    "isAttended": false,
+    "requiresUserInteraction": false,
+    "supportsPersistence": false,
+    "workflowSerialization": "DataContract",
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": true,
+    "pipType": "ChildSession"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "includeOriginalXaml": false,
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [],
+    "saveToCloud": false
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "7014e15b-23c3-4a0b-b257-649d33e9766a",
+      "input": [],
+      "output": []
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Portable"
+}

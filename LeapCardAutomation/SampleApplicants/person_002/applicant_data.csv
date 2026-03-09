@@ -1,0 +1,2 @@
+application_id,full_name,dob,email,institution,academic_year,proof_of_student_file,selfie_file,live_selfie_match_score,payment_authorised
+SLC-0002,Jonathan Smith,1972-07-07,jonathan.smith@example.com,NCI,2025/26,sample_student_id.jpg,selfie.jpg,0.93,True
